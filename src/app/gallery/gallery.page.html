@@ -1,0 +1,36 @@
+<ion-content>
+    <!-- List of photos -->
+    <ion-grid *ngIf="photoProviderService.photos.length; else noPhoto">
+        <ion-row>
+            <ion-col size="6" *ngFor="let photo of photoProviderService.photos; let i = index">
+                <img [src]="photo.data" />
+                <ion-row>
+                    <ion-col>
+                        <ion-button (click)="photoProviderService.deletePicture(i)" expand="full" color="danger">
+                            <ion-icon name="trash"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <!-- If there is no photo -->
+    <ng-template #noPhoto>
+        <div class="no-photos">
+            <div>
+                <h1>
+                    Your Gallery is empty
+                </h1>
+                <h6 class="hint">take some photos</h6>
+            </div>
+        </div>
+    </ng-template>
+
+    <!-- The camera button -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="photoProviderService.takePicture()" class="add-btn">
+            <ion-icon name="camera"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>
